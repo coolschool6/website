@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App - Organize Your Life</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Todo App</h1>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </header>
+
+        <div class="todo-input-section">
+            <form id="todo-form">
+                <input 
+                    type="text" 
+                    id="todo-input" 
+                    placeholder="What needs to be done?" 
+                    required
+                    autocomplete="off"
+                >
+                
+                <div class="input-options">
+                    <select id="category-select" required>
+                        <option value="">Select Category</option>
+                        <option value="work">Work</option>
+                        <option value="personal">Personal</option>
+                    </select>
+                    
+                    <select id="priority-select" required>
+                        <option value="">Priority</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                    
+                    <input 
+                        type="date" 
+                        id="due-date-input"
+                        required
+                    >
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Add Task</button>
+            </form>
+        </div>
+
+        <div class="filters-section">
+            <div class="filter-group">
+                <label>Status:</label>
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+            
+            <div class="filter-group">
+                <label>Category:</label>
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="work">Work</button>
+                <button class="filter-btn" data-category="personal">Personal</button>
+            </div>
+            
+            <div class="filter-group">
+                <label>Sort:</label>
+                <select id="sort-select">
+                    <option value="date-desc">Date (Newest)</option>
+                    <option value="date-asc">Date (Oldest)</option>
+                    <option value="priority">Priority</option>
+                    <option value="due-date">Due Date</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="todo-list" class="todo-list">
+            <!-- Todos will be inserted here -->
+        </div>
+
+        <div class="stats">
+            <span id="active-count">0 active tasks</span>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <h2>Edit Task</h2>
+            <form id="edit-form">
+                <input 
+                    type="text" 
+                    id="edit-todo-input" 
+                    placeholder="Task description" 
+                    required
+                >
+                
+                <div class="input-options">
+                    <select id="edit-category-select" required>
+                        <option value="work">Work</option>
+                        <option value="personal">Personal</option>
+                    </select>
+                    
+                    <select id="edit-priority-select" required>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                    
+                    <input 
+                        type="date" 
+                        id="edit-due-date-input"
+                        required
+                    >
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" id="cancel-edit">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
