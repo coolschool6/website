@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sleek Todo — Organize Your Life</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1 class="logo">Sleek Todo</h1>
+      <div class="header-controls">
+        <button id="theme-toggle" aria-pressed="false" title="Toggle dark / light">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Authentication Section -->
+    <div class="auth-section">
+      <div id="auth-container">
+        <!-- User is logged out - show login/signup -->
+        <div id="auth-forms" class="auth-forms">
+          <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="login">Login</button>
+            <button class="auth-tab" data-tab="signup">Sign Up</button>
+          </div>
+          
+          <form id="login-form" class="auth-form active">
+            <div class="form-row">
+              <label for="login-email">Email</label>
+              <input id="login-email" type="email" required placeholder="your@email.com">
+            </div>
+            <div class="form-row">
+              <label for="login-password">Password</label>
+              <input id="login-password" type="password" required placeholder="Your password">
+            </div>
+            <button type="submit" class="auth-submit">Login</button>
+          </form>
+
+          <form id="signup-form" class="auth-form">
+            <div class="form-row">
+              <label for="signup-email">Email</label>
+              <input id="signup-email" type="email" required placeholder="your@email.com">
+            </div>
+            <div class="form-row">
+              <label for="signup-password">Password</label>
+              <input id="signup-password" type="password" required placeholder="Min. 6 characters">
+            </div>
+            <button type="submit" class="auth-submit">Sign Up</button>
+          </form>
+        </div>
+
+        <!-- User is logged in - show user info -->
+        <div id="user-info" class="user-info" style="display: none;">
+          <span>Welcome, <span id="user-email"></span></span>
+          <button id="logout-btn" class="btn-secondary">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <main class="main">
+      <section class="task-form-section">
+        <form id="task-form" autocomplete="off">
+          <input type="hidden" id="task-id" />
+          <div class="form-row">
+            <label for="title">Task</label>
+            <input id="title" type="text" required placeholder="e.g. Finish project proposal" />
+          </div>
+
+          <div class="form-row">
+            <label for="description">Description</label>
+            <input id="description" type="text" placeholder="Optional details" />
+          </div>
+
+          <div class="form-grid">
+            <div class="form-row">
+              <label for="category">Category</label>
+              <select id="category">
+                <option value="Personal">Personal</option>
+                <option value="Work">Work</option>
+                <option value="Errands">Errands</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="priority">Priority</label>
+              <select id="priority">
+                <option value="3">High</option>
+                <option value="2" selected>Medium</option>
+                <option value="1">Low</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="dueDate">Due date</label>
+              <input id="dueDate" type="date" />
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="save-btn">Add Task</button>
+            <button type="button" id="reset-btn" class="btn-secondary">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="controls-section">
+        <div class="controls-row">
+          <div class="filter-group">
+            <label for="status-filter">Status</label>
+            <select id="status-filter">
+              <option value="all">All</option>
+              <option value="active">Active</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="category-filter">Category</label>
+            <select id="category-filter">
+              <option value="all">All</option>
+              <option value="Personal">Personal</option>
+              <option value="Work">Work</option>
+              <option value="Errands">Errands</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="sort-by">Sort</label>
+            <select id="sort-by">
+              <option value="created_desc">Newest</option>
+              <option value="created_asc">Oldest</option>
+              <option value="due_asc">Due date ↑</option>
+              <option value="due_desc">Due date ↓</option>
+              <option value="priority_desc">Priority ↑</option>
+              <option value="priority_asc">Priority ↓</option>
+            </select>
+          </div>
+
+          <div class="controls-actions">
+            <button id="clear-completed" class="btn-secondary">Clear Completed</button>
+            <div class="status-summary" id="summary"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="list-section" aria-live="polite">
+        <ul id="task-list" class="task-list" role="list"></ul>
+        <div id="empty-state" class="empty-state">No tasks yet — add your first task above.</div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <small>Built for learning DOM manipulation, localStorage, and modern CSS</small>
+      <small>— responsive, accessible, and fast.</small>
+    </footer>
+  </div>
+
+  <script type="module" src="supabase.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
