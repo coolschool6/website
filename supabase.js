@@ -36,3 +36,52 @@ export async function getCurrentUser() {
   const { data } = await supabase.auth.getUser();
   return data?.user ?? null;
 }
+
+// Todo functions
+export async function getTodos() {
+  const { data, error } = await supabase
+    .from('todos')
+    .select('*')
+    .order('created_at', { ascending: false });
+  
+  if (error) throw error;
+  return data;
+}
+
+export async function addTodo(task, description, category, priority, dueDate) {
+  const { data, error } = await supabase
+    .from('todos')
+    .insert([
+      { 
+        task, 
+        description, 
+        category, 
+        priority: parseInt(priority), 
+        due_date: dueDate || null 
+      }
+    ])
+    .select();
+  
+  if (error) throw error;
+  return data[0];
+}
+
+export async function updateTodo(id, updates) {
+  const { data, error } = await supabase
+    .from('todos')
+    .update(updates)
+    .eq('id', id)
+    .select();
+  
+  if (error) throw error;
+  return data[0];
+}
+
+export async function deleteTodo(id) {
+  const { error } = await supabase
+    .from('todos')
+    .delete()
+    .eq('id', id);
+  
+  if (error) throw error;
+}
